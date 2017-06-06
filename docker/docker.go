@@ -108,8 +108,11 @@ func NewImage(qname, user, password string, insecureTLS bool) (*Image, error) {
 	if name == "" {
 		name = strings.Join(nameParts, "/")
 	}
-
-	registry = fmt.Sprintf("https://%s/v2", registry)
+	if insecureTLS {
+		registry = fmt.Sprintf("http://%s/v2", registry)
+	} else {
+		registry = fmt.Sprintf("https://%s/v2", registry)
+	}
 	return &Image{
 		Registry: registry,
 		Name:     name,
