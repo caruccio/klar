@@ -203,8 +203,9 @@ func (i *Image) pullReq() (*http.Response, error) {
 
 	req.Header.Set("Accept", "application/vnd.docker.distribution.manifest.v2+json")
 	req.Header.Set("Accept", "application/vnd.docker.distribution.manifest.list.v2+json")
-
+	dumpRequest(req)
 	resp, err := i.client.Do(req)
+	dumpResponse(resp)
 	if err != nil {
 		fmt.Println("Get error")
 		return nil, err
